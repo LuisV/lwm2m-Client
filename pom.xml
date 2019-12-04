@@ -7,8 +7,22 @@
     <groupId>Luis</groupId>
     <artifactId>lwm2mServer</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.eclipse.leshan/leshan-all -->
+        <dependency>
+            <groupId>org.eclipse.leshan</groupId>
+            <artifactId>leshan-all</artifactId>
+            <version>1.0.0-M11</version>
+        </dependency>
 
-
+        <!-- add any slf4j backend, here we use one of the smallest one: slf4j-simple -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.10</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -26,20 +40,4 @@
             </plugin>
         </plugins>
     </build>
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.eclipse.leshan/leshan-all -->
-        <dependency>
-            <groupId>org.eclipse.leshan</groupId>
-            <artifactId>leshan-all</artifactId>
-            <version>1.0.0-M11</version>
-        </dependency>
-
-        <!-- add any slf4j backend, here we use one of the smallest one: slf4j-simple -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.10</version>
-            <scope>runtime</scope>
-        </dependency>
-    </dependencies>
 </project>
