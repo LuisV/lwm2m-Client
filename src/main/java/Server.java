@@ -1,3 +1,4 @@
+import org.eclipse.californium.core.network.config.NetworkConfig;
 import org.eclipse.leshan.Link;
 import org.eclipse.leshan.core.node.LwM2mResource;
 import org.eclipse.leshan.core.observation.Observation;
@@ -16,6 +17,9 @@ public class Server {
     public static void main (String[] args) {
 
         LeshanServerBuilder builder = new LeshanServerBuilder();
+        NetworkConfig networkConfig = LeshanServerBuilder.createDefaultNetworkConfig();
+        networkConfig.set(NetworkConfig.Keys.PROTOCOL_STAGE_THREAD_COUNT, 5);
+        builder.setCoapConfig(networkConfig);
         final LeshanServer server = builder.build();
         server.start();
 
