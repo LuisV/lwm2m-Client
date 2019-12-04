@@ -15,7 +15,7 @@ public class Client {
 
         ObjectsInitializer initializer = new ObjectsInitializer();
 
-        initializer.setInstancesForObject(LwM2mId.SECURITY, Security.noSec("coap://localhost:5683", 12345));
+        initializer.setInstancesForObject(LwM2mId.SECURITY, Security.noSec("coap://18.217.197.64:5683", 12345));
         initializer.setInstancesForObject(LwM2mId.SERVER, new Server(12345, 30, BindingMode.U, true));
         initializer.setInstancesForObject(LwM2mId.DEVICE, new Device("Testing device", "00001", "11110", "U"));
         initializer.setInstancesForObject(6, new Location());

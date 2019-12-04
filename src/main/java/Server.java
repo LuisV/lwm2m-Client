@@ -16,7 +16,6 @@ public class Server {
     public static void main (String[] args) {
 
         LeshanServerBuilder builder = new LeshanServerBuilder();
-        builder.disableSecuredEndpoint();
         final LeshanServer server = builder.build();
         server.start();
 
