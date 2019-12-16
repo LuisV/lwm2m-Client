@@ -2,7 +2,9 @@ import org.eclipse.californium.core.network.config.NetworkConfig;
 import org.eclipse.leshan.Link;
 import org.eclipse.leshan.core.node.LwM2mResource;
 import org.eclipse.leshan.core.observation.Observation;
+import org.eclipse.leshan.core.request.ObserveRequest;
 import org.eclipse.leshan.core.request.ReadRequest;
+import org.eclipse.leshan.core.response.ObserveResponse;
 import org.eclipse.leshan.core.response.ReadResponse;
 import org.eclipse.leshan.server.californium.LeshanServerBuilder;
 import org.eclipse.leshan.server.californium.impl.LeshanServer;
@@ -34,11 +36,13 @@ public class Server {
                          ) {
                         System.out.println(l);
                     }
-                    ReadResponse response = server.send(registration, new ReadRequest(6,0,5));
-                    if (response.isSuccess()) {
-                        System.out.println("Device Date:" + ((LwM2mResource)response.getContent()).getValue());
+                    ObserveRequest request = new ObserveRequest(6, 0, 5);
+                    ObserveResponse cResponse = server.send(registration, request, 5000);
+                    System.out.println(cResponse);
+                    if (cResponse.isSuccess()) {
+                        System.out.println("Device Date:" + ((LwM2mResource)cResponse.getContent()).getValue());
                     }else {
-                        System.out.println("Failed to read:" + response.getCode() + " " + response.getErrorMessage());
+                        System.out.println("Failed to read:" + cResponse.getCode() + " " + cResponse.getErrorMessage());
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -46,7 +50,9 @@ public class Server {
             }
 
             public void updated(RegistrationUpdate update, Registration updatedReg, Registration previousReg) {
-                System.out.println("device is still here: " + updatedReg.getEndpoint());
+
+                    System.out.println("device is still here: " + updatedReg.getEndpoint());
+
             }
 
             public void unregistered(Registration registration, Collection<Observation> observations, boolean expired,
