@@ -9,11 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.eclipse.leshan/leshan-all -->
-        <dependency>
-            <groupId>org.eclipse.leshan</groupId>
-            <artifactId>leshan-all</artifactId>
-            <version>1.0.0-M11</version>
-        </dependency>
+
 
         <!-- add any slf4j backend, here we use one of the smallest one: slf4j-simple -->
         <dependency>
@@ -22,6 +18,28 @@
             <version>1.7.10</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.leshan</groupId>
+            <artifactId>leshan-core</artifactId>
+            <version>1.0.0-M13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.leshan</groupId>
+            <artifactId>leshan-client-cf</artifactId>
+            <version>1.0.0-M13</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -58,6 +76,14 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>

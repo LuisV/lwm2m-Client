@@ -3,8 +3,6 @@ package lwm2m_objects;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
-
 import org.eclipse.leshan.client.request.ServerIdentity;
 import org.eclipse.leshan.client.resource.BaseInstanceEnabler;
 import org.eclipse.leshan.core.model.ObjectModel;
@@ -17,29 +15,19 @@ public class Location extends BaseInstanceEnabler {
     private static final Logger LOG = LoggerFactory.getLogger(Location.class);
 
     private static final List<Integer> supportedResources = Arrays.asList(0, 1, 5);
-    private static final Random RANDOM = new Random();
 
     private float latitude;
     private float longitude;
-    private float scaleFactor;
     private Date timestamp;
 
     public Location() {
-        this(null, null, 1.0f);
+        this(0f, 0f);
     }
 
-    public Location(Float latitude, Float longitude, float scaleFactor) {
-        if (latitude != null) {
-            this.latitude = latitude + 90f;
-        } else {
-            this.latitude = RANDOM.nextInt(180);
-        }
-        if (longitude != null) {
-            this.longitude = longitude + 180f;
-        } else {
-            this.longitude = RANDOM.nextInt(360);
-        }
-        this.scaleFactor = scaleFactor;
+    public Location(Float latitude, Float longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+
         timestamp = new Date();
     }
 
@@ -58,41 +46,13 @@ public class Location extends BaseInstanceEnabler {
         }
     }
 
-    public void moveLocation(String nextMove) {
-        switch (nextMove.charAt(0)) {
-            case 'w':
-                moveLatitude(1.0f);
-                break;
-            case 'a':
-                moveLongitude(-1.0f);
-                break;
-            case 's':
-                moveLatitude(-1.0f);
-                break;
-            case 'd':
-                moveLongitude(1.0f);
-                break;
-        }
-    }
-
-    private void moveLatitude(float delta) {
-        latitude = latitude + delta * scaleFactor;
-        timestamp = new Date();
-        fireResourcesChange(0, 5);
-    }
-
-    private void moveLongitude(float delta) {
-        longitude = longitude + delta * scaleFactor;
-        timestamp = new Date();
-        fireResourcesChange(1, 5);
-    }
 
     public float getLatitude() {
-        return latitude - 90.0f;
+        return latitude;
     }
 
     public float getLongitude() {
-        return longitude - 180.f;
+        return longitude;
     }
 
     public Date getTimestamp() {
